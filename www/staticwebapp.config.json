@@ -11,6 +11,9 @@
       "statusCode": 200
     }
   ],
+  "platform": {
+    "apiRuntime": "dotnet:8.0"
+  },
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/js/*", "/api/*"]
