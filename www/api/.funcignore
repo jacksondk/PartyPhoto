@@ -1,0 +1,11 @@
+.git*
+.vscode
+local.settings.json
+test
+.vs
+*.csproj.user
+*.sln
+obj
+bin
+*.njsproj
+*.njsproj.user

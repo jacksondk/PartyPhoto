@@ -1,0 +1,16 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "partyphoto": {
+      "appLocation": "www",
+      "apiLocation": "www/api",
+      "outputLocation": "",
+      "apiLanguage": "dotnet-isolated",
+      "apiVersion": "8.0",
+      "appBuildCommand": "",
+      "apiBuildCommand": "dotnet publish -c Release",
+      "run": "",
+      "appDevserverUrl": "http://localhost:8080"
+    }
+  }
+}
