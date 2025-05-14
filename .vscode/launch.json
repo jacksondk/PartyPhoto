@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to .NET Functions",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:azureFunctions.pickProcess}"
+    },
+    {
+      "name": "Debug Azure Functions",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "func",
+      "args": [
+        "start",
+        "--verbose"
+      ],
+      "cwd": "${workspaceFolder}/www/api",
+      "console": "internalConsole"
+    }
+  ]
+}

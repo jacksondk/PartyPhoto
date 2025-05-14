@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "PhotoFunctions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7198"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "containerRunArguments": "--init",
+      "httpPort": 32807,
+      "useSSL": false
+    }
+  }
+}

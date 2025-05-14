@@ -1,0 +1,66 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/www/api/Api.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/www/api/Api.csproj",
+        "--configuration",
+        "Release",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/www/api/Api.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "start api",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/www/api && func start",
+      "problemMatcher": "$func-watch",
+      "isBackground": true
+    },
+    {
+      "label": "serve frontend",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/www && pwsh -Command \"$server = [System.Net.HttpListener]::new(); $server.Prefixes.Add('http://localhost:8080/'); $server.Start(); Write-Host 'Server started at http://localhost:8080/'; while ($server.IsListening) { $context = $server.GetContext(); $response = $context.Response; $filePath = Join-Path (Get-Location) $context.Request.Url.LocalPath.TrimStart('/'); if (Test-Path -Path $filePath -PathType Leaf) { $content = [System.IO.File]::ReadAllBytes($filePath); $response.ContentLength64 = $content.Length; $response.OutputStream.Write($content, 0, $content.Length); } else { $response.StatusCode = 404; } $response.Close(); }\"",
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "start local development",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "start api",
+        "serve frontend"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

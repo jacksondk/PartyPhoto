@@ -1,0 +1,22 @@
+# Azure Functions artifacts
+api/bin
+api/obj
+api/.vs
+
+# Node.js
+node_modules/
+
+# Local development
+local.settings.json
+.env
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+*.log
+npm-debug.log*

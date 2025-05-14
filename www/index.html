@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Camera on the Table</title>
+</head>
+
+<body>
+  <main>
+    <h1>Camera on the Table</h1>
+    <p class="app-description">Share your party photos with everyone at the event!</p>
+
+    <div class="upload-container">
+      <h2>Select an Image to Upload</h2>
+      <div class="button-container">
+        <label for="image-upload" class="upload-button">Choose Image</label>
+        <input type="file" id="image-upload" accept="image/*" hidden>
+      </div>
+      <div id="image-preview-container" class="hidden">
+        <h3>Image Preview:</h3>
+        <img id="image-preview" src="" alt="Preview">
+        <button id="upload-btn" class="action-button">Upload Image</button>
+      </div>
+    </div>
+    
+    <footer>
+      <p>PartyPhoto App v1.0.0 | &copy; 2025</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+
+</html>
