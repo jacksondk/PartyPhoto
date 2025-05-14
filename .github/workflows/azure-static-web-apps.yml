@@ -18,6 +18,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
+          
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+          
+      - name: Build API
+        run: dotnet build www/api/Api.csproj --configuration Release
+        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -28,6 +37,8 @@ jobs:
           api_location: "/www/api"
           output_location: ""
           skip_app_build: true
+          skip_api_build: true  # We built the API manually above
+          action: "upload"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
