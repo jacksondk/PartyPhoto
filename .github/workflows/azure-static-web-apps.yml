@@ -41,10 +41,11 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           app_location: "/www"
-          api_location: "/PhotoFunctions/publish"
+          api_location: "/PhotoFunctions"
+          api_build_command: "dotnet publish -c Release -o publish"
           output_location: ""
           skip_app_build: true
-          skip_api_build: true  # We already built the API
+          # skip_api_build: true  # We already built the API
           action: "upload"
 
   close_pull_request_job:
