@@ -51,10 +51,9 @@ namespace PhotoFunctions
         public async Task<IActionResult> GetRandomImage([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            var blogServiceUrl = Environment.GetEnvironmentVariable("BlobServiceUrl");
-            var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
-            _logger.LogInformation("BlobServiceUrl: {url}, BlobSasToken: {token}", blogServiceUrl, sasToken);
-            var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
+            var storageConnectionString = Environment.GetEnvironmentVariable("StorageConnectionString");
+            
+            var blobServiceClient = new BlobServiceClient(storageConnectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient("photos");
 
             // Get a random image from the container
