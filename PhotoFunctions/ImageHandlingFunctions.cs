@@ -58,9 +58,15 @@ namespace PhotoFunctions
             var containerClient = blobServiceClient.GetBlobContainerClient("photos");
 
             // Get a random image from the container
-            var blobs = containerClient.GetBlobs();
+            // List all blobs in the container
+            var blobItems = new List<BlobItem>();
+            await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
+            {
+                blobItems.Add(blobItem);
+            }
+            
             var random = new Random();
-            var blobList = blobs.ToList();
+            var blobList = blobItems.ToList();
             _logger.LogDebug("Blob list count: {count}", blobList.Count);
             if (blobList.Count == 0)
             {
