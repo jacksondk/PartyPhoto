@@ -9,14 +9,9 @@ using Azure.Storage.Blobs.Specialized;
 
 namespace PhotoFunctions
 {
-    public class Function1
+    public class ImageHandlingFunctions(ILogger<ImageHandlingFunctions> logger)
     {
-        private readonly ILogger<Function1> _logger;
-
-        public Function1(ILogger<Function1> logger)
-        {
-            _logger = logger;
-        }
+        private readonly ILogger<ImageHandlingFunctions> _logger = logger;
 
         [Function("Upload")]
         public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequest req)
@@ -45,8 +40,8 @@ namespace PhotoFunctions
             var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
             var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
             var containerClient = blobServiceClient.GetBlobContainerClient("photos");
-            var info = await containerClient.UploadBlobAsync(filename, file.OpenReadStream());
-
+            await containerClient.UploadBlobAsync(filename, file.OpenReadStream());
+            
             // Return success response
             return new OkObjectResult(new { message = $"File uploaded successfully" });
 
@@ -58,6 +53,7 @@ namespace PhotoFunctions
             _logger.LogInformation("C# HTTP trigger function processed a request.");
             var blogServiceUrl = Environment.GetEnvironmentVariable("BlobServiceUrl");
             var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
+            _logger.LogInformation("BlobServiceUrl: {url}, BlobSasToken: {token}", blogServiceUrl, sasToken);
             var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
             var containerClient = blobServiceClient.GetBlobContainerClient("photos");
 
@@ -65,6 +61,7 @@ namespace PhotoFunctions
             var blobs = containerClient.GetBlobs();
             var random = new Random();
             var blobList = blobs.ToList();
+            _logger.LogDebug("Blob list count: {count}", blobList.Count);
             if (blobList.Count == 0)
             {
                 return new NotFoundObjectResult("No images found.");
@@ -76,6 +73,7 @@ namespace PhotoFunctions
             var stream = await blobClient.OpenReadAsync();
 
             // Return the URL of the random image
+            _logger.LogDebug("Blob type {count}", randomBlob.Properties.ContentType);
             return new FileStreamResult(stream, randomBlob.Properties.ContentType)
             {
                 FileDownloadName = randomBlob.Name
