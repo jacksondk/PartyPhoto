@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load and display a random image from the server
     function loadRandomImage() {
         fetch('/api/GetRandomImage')
-            .then(response => response.blog())
+            .then(response => response.blob())
             .then(imageBlob => {
                 const imageUrl = URL.createObjectURL(imageBlob);
                 const imagePreview = document.getElementById('image-preview');
