@@ -146,7 +146,7 @@ main>h1 {
 }
 
 /* Slideshow styles */
-body.slideshow {
+html.slideshow, body.slideshow {
   background-color: black;
   color: white;
   height: 100%;
