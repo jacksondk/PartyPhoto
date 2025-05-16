@@ -73,10 +73,13 @@ namespace PhotoFunctions
 
             // Generate a URL for the blob
             var blobClient = containerClient.GetBlobClient(randomBlob.Name);
-            var url = blobClient.Uri.ToString();
+            var stream = await blobClient.OpenReadAsync();
 
             // Return the URL of the random image
-            return new OkObjectResult(new { url });
+            return new FileStreamResult(stream, randomBlob.Properties.ContentType)
+            {
+                FileDownloadName = randomBlob.Name
+            };
         }
     }
 }
