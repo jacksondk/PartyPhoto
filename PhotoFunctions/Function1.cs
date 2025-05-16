@@ -51,5 +51,32 @@ namespace PhotoFunctions
             return new OkObjectResult(new { message = $"File uploaded successfully" });
 
         }
+
+        [Function("GetRandomImage")]
+        public async Task<IActionResult> GetRandomImage([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
+        {
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            var blogServiceUrl = Environment.GetEnvironmentVariable("BlobServiceUrl");
+            var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
+            var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
+            var containerClient = blobServiceClient.GetBlobContainerClient("photos");
+
+            // Get a random image from the container
+            var blobs = containerClient.GetBlobs();
+            var random = new Random();
+            var blobList = blobs.ToList();
+            if (blobList.Count == 0)
+            {
+                return new NotFoundObjectResult("No images found.");
+            }
+            var randomBlob = blobList[random.Next(blobList.Count)];
+
+            // Generate a URL for the blob
+            var blobClient = containerClient.GetBlobClient(randomBlob.Name);
+            var url = blobClient.Uri.ToString();
+
+            // Return the URL of the random image
+            return new OkObjectResult(new { url });
+        }
     }
 }

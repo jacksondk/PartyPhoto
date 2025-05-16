@@ -2,10 +2,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('image-upload');
   const liveInput = document.getElementById('image-live');
+  
 
   const imagePreviewContainer = document.getElementById('image-preview-container');
   const imagePreview = document.getElementById('image-preview');
-
   const uploadBtn = document.getElementById('upload-btn');
 
   // Create upload progress elements
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Selected file:', file.name, 'Size:', (file.size / 1024).toFixed(2), 'KB');
     }
   });
+
   uploadBtn.addEventListener('click', () => {
     // Check both file inputs and use whichever has a file
     const fileFromPicker = fileInput.files[0];
@@ -100,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Show success message
           const successMessage = document.createElement('div');
           successMessage.className = 'success-message';
-          successMessage.textContent = `File uploaded successfully! ${file.name}`;
+          successMessage.textContent = `Image uploaded successfully!`;
           progressContainer.parentNode.insertBefore(successMessage, progressContainer.nextSibling);
 
           // Auto-remove message after 5 seconds
