@@ -1,6 +1,7 @@
 // File picker and image preview functionality
 document.addEventListener('DOMContentLoaded', () => {
   const fileInput = document.getElementById('image-upload');
+  const liveInput = document.getElementById('image-live');
   const imagePreviewContainer = document.getElementById('image-preview-container');
   const imagePreview = document.getElementById('image-preview');
   const uploadBtn = document.getElementById('upload-btn');
@@ -40,6 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Selected file:', file.name, 'Size:', (file.size / 1024).toFixed(2), 'KB');
     }
   });  // Handle upload button click
+
+  liveInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    
+    if (file) {
+      // Show the preview container
+      imagePreviewContainer.classList.remove('hidden');
+      
+      // Create a URL for the selected image
+      const imageUrl = URL.createObjectURL(file);
+      
+      // Set the preview image source
+      imagePreview.src = imageUrl;
+      
+      // Log file information
+      console.log('Selected file:', file.name, 'Size:', (file.size / 1024).toFixed(2), 'KB');
+    }
+  });
   uploadBtn.addEventListener('click', () => {
     const file = fileInput.files[0];
     

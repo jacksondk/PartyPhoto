@@ -39,24 +39,17 @@ namespace PhotoFunctions
             // Get file info
             _logger.LogInformation("Received file: {file.FileName}, Size: {file.Length} bytes", file.FileName, file.Length);
 
-            // Read file bytes
-            using (var memoryStream = new MemoryStream())
-            {
-                //await file.CopyToAsync(memoryStream);
-                //byte[] fileBytes = memoryStream.ToArray();
+            var filenameExtension = Path.GetExtension(file.FileName);
+            var filename = string.Format("{0:yyyyMMddHHmmss}_{1}", DateTime.UtcNow, filenameExtension);
+            var blogServiceUrl = Environment.GetEnvironmentVariable("BlobServiceUrl");
+            var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
+            var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
+            var containerClient = blobServiceClient.GetBlobContainerClient("photos");
+            var info = await containerClient.UploadBlobAsync(filename, file.OpenReadStream());
 
-                // Now you have the file bytes in the fileBytes variable
-                // You can process them or save them as needed
-                //_logger.LogInformation($"Successfully read {fileBytes.Length} bytes");
-                var blogServiceUrl = Environment.GetEnvironmentVariable("BlobServiceUrl");
-                var sasToken = Environment.GetEnvironmentVariable("BlobSasToken");
-                var blobServiceClient = new BlobServiceClient(new Uri($"{blogServiceUrl}?{sasToken}"), null);
-                var containerClient = blobServiceClient.GetBlobContainerClient("photos");
-                var info = await containerClient.UploadBlobAsync("test.jpg", file.OpenReadStream());
+            // Return success response
+            return new OkObjectResult(new { message = $"File uploaded successfully" });
 
-                // Return success response
-                return new OkObjectResult(new { message = $"File uploaded successfully" });
-            }
         }
     }
 }
