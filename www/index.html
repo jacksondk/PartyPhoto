@@ -14,18 +14,18 @@
     <p class="app-description">Share your party photos with everyone at the event!</p>
 
     <div class="upload-container">
-      <h2>Select an Image to Upload</h2>
+      <h2>Old or new picture?</h2>
       <div class="button-container">
-        <label for="image-upload" class="upload-button">Choose Image</label>
+        <label for="image-upload" class="upload-button">Upload image from gallery</label>
         <input type="file" id="image-upload" accept="image/*" hidden>
       </div>
-      <div class="camera">
-        <label for="image-upload" class="upload-button">Choose Image</label>
-        <input type="file" id="image-live" accept="image/*" capture="camera">
+      <div class="button-container">
+        <label for="image-live" class="upload-button">Start camera</label>
+        <input type="file" id="image-live" accept="image/*" capture="camera" hidden>
       </div>
       <div id="image-preview-container" class="hidden">
         <h3>Image Preview:</h3>
-        <img id="image-preview" src="" alt="Preview">
+        <img id="image-preview" src="" alt="Preview of image to be uploaded">
         <button id="upload-btn" class="action-button">Upload Image</button>
       </div>
     </div>
