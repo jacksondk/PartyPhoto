@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var currentImageElement = document.getElementById('image-' + (activeImageIndex === 1 ? 2 : 1));
         activeImageIndex = activeImageIndex === 1 ? 2 : 1;
 
-        fetch(imageUrl)
+        fetch('/api/RandomImage')
             .then(response => response.blob())
             .then(imageBlob => {
                 const imageUrl = URL.createObjectURL(imageBlob);
