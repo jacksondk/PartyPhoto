@@ -5,32 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Camera on the Table</title>
+  <title>Del dit fest billede</title>
 </head>
 
 <body>
   <main>
-    <h1>Camera on the Table</h1>
-    <p class="app-description">Share your party photos with everyone at the event!</p>
-
+    <h1>Del dit fest billede</h1>
     <div class="upload-container">
-      <h2>Old or new picture?</h2>
+      <h2>Gammelt eller nyt billede?</h2>
       <div class="button-container">
-        <label for="image-upload" class="upload-button">Upload image from gallery</label>
+        <label for="image-upload" class="upload-button">Vælg et billede du allerede har taget</label>
         <input type="file" id="image-upload" accept="image/*" hidden>
       </div>
       <div class="button-container">
-        <label for="image-live" class="upload-button">Start camera</label>
+        <label for="image-live" class="upload-button">Tag et nyt billede</label>
         <input type="file" id="image-live" accept="image/*" capture="camera" hidden>
       </div>
       <div id="image-preview-container" class="hidden">
-        <h3>Image Preview:</h3>
+        <h3>Billede:</h3>
         <img id="image-preview" src="" alt="Preview of image to be uploaded">
-        <button id="upload-btn" class="action-button">Upload Image</button>
+        <button id="upload-btn" class="action-button">Del dit billede</button>
       </div>
     </div>
     <div class="upload-container">
-      <a href="slideshow.html" class="action-button"><label>See pictures</label></a>
+      <a href="slideshow.html" class="action-button"><label>Se alle billeder</label></a>
     </div>
     
     <footer>

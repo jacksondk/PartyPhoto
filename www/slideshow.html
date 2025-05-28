@@ -13,9 +13,6 @@
     <img id="image-1" src="" alt="Preview" class="crossfade-image active">
     <img id="image-2" src="" alt="Preview" class="crossfade-image">
   </div>
-
-
-
   <footer>
     <p>PartyPhoto App v1.0.0 | Michael Jacobsen &copy; 2025</p>
   </footer>
@@ -58,6 +55,18 @@
 
     .crossfade-image.active {
       opacity: 1;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 1px;
+      right: 1px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1px 1px;
+      border-radius: 1px;
+      z-index: 100; /* This ensures the footer stays on top of other elements */
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
     }
   </style>
   <script src="slideshow.js"></script>
